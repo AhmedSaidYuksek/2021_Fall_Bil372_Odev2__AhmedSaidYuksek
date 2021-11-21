@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />   
+    <title>Document</title>
+</head>
+<body>
+    <div class="sheet1">
+         <p class="message">{{ message }}</p>
+    <form action="./islem" method="post"> 
+        {% if nmbr %}
+        Yapmak istedginiz islemi giriniz
+        {% endif %}          
+            
+            <select name="islem">
+              <option value="">secim</option>
+              <option value="problem_ekleme">problem islemleri</option>
+              <option value="Personel_ekleme">Personel islemleri</option>
+              <option value="Mudehale_ekleme">Mudehale islemleri</option> 
+              <option value="il_ekleme">il islemleri</option>
+              <option value="ilce_ekleme">ilce islemleri</option>
+              <option value="Birim_ekleme">Birim islemleri</option> 
+              <option value="Diger_islem">diger islemler</option>
+              <option value="eslesme">eslesme islemleri</option>  
+
+
+            </select>                 
+                
+        <input type="submit" value="sec" class="btn" />
+    </form>
+    <form action="./returner" method="post">
+        cikis yapmak icin tiklayiniz
+        <input type="submit" value="cikis">
+    </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />   
+    <title>Document</title>
+</head>
+<body>
+  <div class="sheet1">
+    <p class="message">{{ message }}</p>
+<form action="./islem1" method="post">
+    islem turunuzu secin
+      <select name="islem">
+      <option value="">secim</option>
+      <option value="personel_ekleme">personel_ekleme</option>      
+      <option value="personel_silme">personel_silme</option>     
+    </select>
+     silme islemi icin sadece kodu girmeniz yeterli<br />    
+       personel verilerini giriniz:
+       <input type="text" name="KullaniciAdi" placeholder="Kullanıcı adı">
+       <input type="text" name="Email" placeholder="Email ">
+       <input type="text" name="Ad" placeholder="Ad ">
+       <input type="text" name="Soyad" placeholder="Soyad ">
+       <input type="text" name="SicilNo" placeholder="SicilNo ">
+       <input type="text" name="Cep" placeholder="Cep ">
+       <input type="text" name="Ev_Adresi" placeholder="Ev Adresi">
+       <input type="number" name="IlKodu" placeholder="IlKodu ">
+       <input type="number" name="IlceKodu" placeholder="IlceKodu ">
+       <input type="number" name="PostaKodu" placeholder="PostaKodu ">
+       <input type="text" name="UstKullaniciAdi" placeholder="UstKullaniciAdi">
+       <input type="text" name="CalistigiBirimKodu" placeholder="CalistigiBirimKodu ">          
+   <input type="submit" value="gönder" class="btn" />
+</form>
+</div>
+    
+</body>
+</html>

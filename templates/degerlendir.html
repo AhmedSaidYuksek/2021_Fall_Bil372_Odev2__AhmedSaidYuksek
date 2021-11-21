@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />   
+    <title>Document</title>
+</head>
+<body>
+  <div class="sheet1">    
+<form action="./degerlendirmeGirdi" method="post">
+  {% if message %}
+      <p class="message">{{ message | safe }}</p>
+      {% endif %}
+        problemID ve belirtecID ve skoru giriniz:       
+       <input type="text" name="problemID" placeholder="problemID">       
+       <input type="text" name="belirtecID" placeholder="belirtecID ">
+       <input type="text" name="skor" placeholder="skor ">
+       <input type="text" name="skortarih" placeholder="skor tarih ">
+        
+
+   <input type="submit" value="gönder" class="btn" />
+</form>
+<form action="./returner" method="post">
+  <input type="submit" value="cikis" class="btn" />
+</form>
+</div>
+    
+</body>
+</html>

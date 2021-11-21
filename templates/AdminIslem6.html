@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />   
+    <title>Document</title>
+</head>
+<body>
+  <div class="sheet1">
+    <p class="message">{{ message }}</p>
+<form action="./islem6" method="post">
+    islem turunuzu secin
+    <select name="islem">
+        <option value="">secim</option>
+        <option value="birim_ekleme">birim_ekleme</option>
+        <option value="birim_guncelleme">birim_guncelleme</option>
+        <option value="birim_silme">birim_silme</option>     
+      </select>
+       silme islemi icin sadece kodu girmeniz yeterli<br />    
+       birim verilerini giriniz:
+       <input type="text" name="birim_kodu" placeholder="birim_kodu">
+       <input type="text" name="birim_adi" placeholder="birim_adi ">   
+       <input type="text" name="ustbirim_kodu" placeholder="ust_birim_kodu "> 
+       <input type="text" name="bulundugu_adres" placeholder="bulundugu_adres">       
+       <input type="text" name="il_kodu" placeholder="il_kodu ">   
+       <input type="text" name="ilce_kodu" placeholder="ilce_kodu "> 
+       <input type="text" name="posta_kodu" placeholder="posta_kodu ">   
+       <input type="text" name="Birim_mudur_kullanici_Adi" placeholder="Birim_mudur_kullanici_Adi ">   
+
+   <input type="submit" value="gönder" class="btn" />
+</form>
+</div>
+    
+</body>
+</html>

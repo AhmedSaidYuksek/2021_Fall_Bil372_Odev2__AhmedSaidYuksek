@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />
+    <title>Document</title>
+</head>
+<body> <h1>HOME PAGE</h1>
+    <div class="sheet1">
+        {% if message %}
+      <p class="message">{{ message | safe }}</p>
+      {% endif %}
+      Kullanici adinizi giriniz:  
+    <form action="./submit" method="post">
+        <input type="text" name="username" placeholder="Kullanıcı adı">        
+            kullanici turunuzu giriniz
+            <select name="Kullanici">
+              <option value="">secim</option>
+              <option value="Yonetici">Yonetici</option>
+              <option value="Personel">Personel</option>              
+            </select>                  
+        sifrenizi giriniz:
+        <input type="password" name="sifre" placeholder="sifre">        
+        <input type="submit" value="Submit" class="btn" />
+    </form>
+    <form action="./islemP" method="post">
+        problem bildirimi icin tiklayiniz
+        <input type="submit" value="problem">
+    </form>
+    <form action="./kayitAcma" method="post">
+        kayit icin
+        <input type="submit" value="kayit">
+    </form>
+</div>
+</body>
+</html>
+

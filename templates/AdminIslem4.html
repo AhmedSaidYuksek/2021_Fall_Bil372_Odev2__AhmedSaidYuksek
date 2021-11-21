@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />   
+    <title>Document</title>
+</head>
+<body>
+  <div class="sheet1">
+    <p class="message">{{ message }}</p>
+<form action="./islem4" method="post">
+    islem turunuzu secin
+    <select name="islem">
+        <option value="">secim</option>
+        <option value="il_ekleme">il_ekleme</option>
+        <option value="il_guncelleme">il_guncelleme</option>
+        <option value="il_silme">il_silme</option>     
+      </select>
+      silme islemi icin sadece kodu girmeniz yeterli<br />
+             il verilerini giriniz:
+       <input type="text" name="il_Adi" placeholder="il_Adi">
+       <input type="text" name="il_kodu" placeholder="il_kodu ">                
+   <input type="submit" value="gönder" class="btn" />
+</form>
+</div>
+    
+</body>
+</html>

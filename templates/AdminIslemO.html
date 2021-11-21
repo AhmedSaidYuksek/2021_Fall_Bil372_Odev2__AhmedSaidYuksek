@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />   
+    <title>Document</title>
+</head>
+<body>
+  <div class="sheet1">    
+<form action="./islemO" method="post">
+    <h2>Genel CURD İslemlerine Hos Geldiniz</h2>        
+    <h3>Silme islemi icin sadece kod girmeniz yeterli<br /> </h3>    
+       
+        <input type="radio" name="Alanlar" value="1" /> Alan girme &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        <input type="radio" name="Alanlar" value="2" /> Alan silme &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        <input type="radio" name="Alanlar" value="3" checked /> Islem yok
+        <br />
+        <input type="radio" name="Sinif" value="1" /> Sinif girme &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        <input type="radio" name="Sinif" value="2" /> Sinif silme &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        <input type="radio" name="Sinif" value="3" checked /> Islem yok
+        <br />
+        <input type="radio" name="Mudehale" value="1" /> Mudehale girme
+        <input type="radio" name="Mudehale" value="2" /> Mudehale silme&#160; 
+        <input type="radio" name="Mudehale" value="3" checked /> Islem yok
+        <br />
+        <input type="radio" name="Aktiviteler" value="1" /> Aktiviteleri girme    
+        <input type="radio" name="Aktiviteler" value="2" /> Aktiviteleri silme
+        <input type="radio" name="Aktiviteler" value="3" checked /> Islem yok   
+        <br />
+        <input type="radio" name="cikti" value="1" /> Cikti girme  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;   
+        <input type="radio" name=" cikti" value="2" /> Cikti silme  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        <input type="radio" name="cikti" value="3" checked /> Islem yok    
+        <br />
+        <input type="radio" name="Belirtec" value="1" /> Belirtec girme &#160;&#160;&#160;
+        <input type="radio" name=" Belirtec" value="2" /> Belirtec silme &#160;&#160;&#160;
+        <input type="radio" name="Belirtec" value="3" checked /> Islem yok
+        <br />
+        <h4> Alan bilgileri:</h4>
+       
+       <input type="text" name="AlanID" placeholder="AlanID">
+       <input type="text" name="AlanAdi" placeholder="AlanAdi">
+       <input type="radio" name="AlanTipiA" value="0" checked /> Mudehale
+       <input type="radio" name="AlanTipiA" value="1" /> cikti
+       <br />
+       <h4>Sinif bilgileri:</h4>
+       
+       <input type="text" name="sinifID" placeholder="sinifID ">
+       <input type="text" name="SinifAdi" placeholder="SinifAdi ">      
+       <input type="radio" name="AlanTipiS" value="0" checked /> Mudehale
+       <input type="radio" name="AlanTipiS" value="1" /> cikti
+       <br />
+       <h4> Mudehale bilgileri:</h4>
+      
+       <input type="text" name="AlanIDM" placeholder="AlanID ">
+       <input type="text" name="SinifIDM" placeholder="SinifID ">      
+       <input type="text" name="MudehaleID" placeholder="MudehaleID ">
+       <input type="text" name="MudehaleAdi" placeholder="Mudehale Adi ">    
+       <h4> Aktivite bilgileri:</h4>  
+      
+       <input type="text" name="AktiviteID" placeholder="AktiviteID">
+       <input type="text" name="AktiviteTanimi" placeholder="Aktivite Tanimi ">
+       <h4>Cikti bilgileri:</h4>
+       
+       <input type="text" name="AlanIDC" placeholder="AlanID ">
+       <input type="text" name="SinifIDC" placeholder="SinifID ">
+       <input type="text" name="CiktiID" placeholder="CiktiID">
+       <input type="text" name="CiktiAdi" placeholder="CiktiAdi ">
+       <h4>Belirtec bilgileri:</h4>
+       
+       <input type="text" name="BelirtecIDC" placeholder="BelirtecID">
+       <input type="text" name="BelirtecTanimi" placeholder="BelirtecTanimi ">
+        
+
+   <input type="submit" value="gönder" class="btn" />
+</form>
+</div>
+    
+</body>
+</html>

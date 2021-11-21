@@ -1,0 +1,48 @@
+* {
+	box-sizing: border-box;
+	margin: 40;
+	padding: 0;
+}
+h1 {
+	max-width: 650px;
+	margin: 1rem auto;
+	overflow: auto;
+	padding: 0 2rem;
+	color: rgb(15, 14, 14);
+	margin-top: 15px;
+}
+body {
+	background: #eef098;
+	font-family: Arial, Helvetica, sans-serif;
+	color: rgb(7, 68, 129);
+	line-height: 1.6;
+}
+.sheet1 {
+	max-width: 650px;
+	margin: 1rem auto;
+	overflow: auto;
+	padding: 0 2rem;
+}
+.sheet2 {
+	margin: 1rem 0;
+}
+input[type='text'],
+select,
+textarea {
+	display: block;
+	width: 100%;
+	padding: 0.4rem;
+	font-size: 1.2rem;
+    color: rgb(12, 12, 12);
+    background: #afb9b3;
+	border: 1px solid #ccc;
+}
+input[type="password"] {
+    display: block;
+	width: 100%;
+	padding: 0.4rem;
+	font-size: 1.2rem;
+    color: rgb(12, 12, 12);
+    background: #afb9b3;
+	border: 1px solid #ccc;
+}
