@@ -1,0 +1,1812 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.0
+-- Dumped by pg_dump version 14.0
+
+-- Started on 2021-11-21 22:30:11
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 223 (class 1259 OID 16503)
+-- Name: Aktiviteler; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Aktiviteler" (
+    "AktiviteID" integer NOT NULL,
+    "AktiviteTanimi" character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public."Aktiviteler" OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 16502)
+-- Name: Aktiviteler_AktiviteID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Aktiviteler_AktiviteID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Aktiviteler_AktiviteID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3550 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: Aktiviteler_AktiviteID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Aktiviteler_AktiviteID_seq" OWNED BY public."Aktiviteler"."AktiviteID";
+
+
+--
+-- TOC entry 217 (class 1259 OID 16478)
+-- Name: Alanlar; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Alanlar" (
+    "AlanID" integer NOT NULL,
+    "AlanAdi" character varying(30) NOT NULL,
+    "AlanTipi" boolean NOT NULL
+);
+
+
+ALTER TABLE public."Alanlar" OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16477)
+-- Name: Alanlar_AlanID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Alanlar_AlanID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Alanlar_AlanID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3551 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: Alanlar_AlanID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Alanlar_AlanID_seq" OWNED BY public."Alanlar"."AlanID";
+
+
+--
+-- TOC entry 229 (class 1259 OID 16532)
+-- Name: Belirtecler; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Belirtecler" (
+    "BelirtecID" integer NOT NULL,
+    "BelirtecAdi" character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."Belirtecler" OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 16531)
+-- Name: Belirtecler_BelirtecID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Belirtecler_BelirtecID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Belirtecler_BelirtecID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3552 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: Belirtecler_BelirtecID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Belirtecler_BelirtecID_seq" OWNED BY public."Belirtecler"."BelirtecID";
+
+
+--
+-- TOC entry 232 (class 1259 OID 16637)
+-- Name: Birimler; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Birimler" (
+    "BirimAdi" character(30) NOT NULL,
+    "BirimKodu" integer NOT NULL,
+    "BulunduguAdres" character(200) NOT NULL,
+    "IlKodu" integer NOT NULL,
+    "UstBirimKodu" integer,
+    "IlceKodu" integer NOT NULL,
+    "PostaKodu" integer NOT NULL,
+    "BirimMudurKullaniciAdi" character(30) NOT NULL
+);
+
+
+ALTER TABLE public."Birimler" OWNER TO postgres;
+
+--
+-- TOC entry 238 (class 1259 OID 16888)
+-- Name: CalisanProblem; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."CalisanProblem" (
+    "ProblemID" integer NOT NULL,
+    "KullaniciAdi" character(30) NOT NULL,
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "MudehaleID" integer NOT NULL,
+    "AktiviteID" integer NOT NULL,
+    "AktiviteAciklama" character(200) NOT NULL,
+    "Tarih" date
+);
+
+
+ALTER TABLE public."CalisanProblem" OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 16521)
+-- Name: Cikti; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Cikti" (
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "CiktiID" integer NOT NULL,
+    "CiktiAdi" character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."Cikti" OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 16541)
+-- Name: CiktiDetay; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."CiktiDetay" (
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "CiktiID" integer NOT NULL,
+    "BelirtecID" character(1) NOT NULL,
+    "Sira" integer NOT NULL
+);
+
+
+ALTER TABLE public."CiktiDetay" OWNER TO postgres;
+
+--
+-- TOC entry 230 (class 1259 OID 16540)
+-- Name: CiktiDetay_CiktiID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."CiktiDetay_CiktiID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."CiktiDetay_CiktiID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3553 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: CiktiDetay_CiktiID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."CiktiDetay_CiktiID_seq" OWNED BY public."CiktiDetay"."CiktiID";
+
+
+--
+-- TOC entry 226 (class 1259 OID 16520)
+-- Name: Cikti_CiktiID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Cikti_CiktiID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Cikti_CiktiID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3554 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: Cikti_CiktiID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Cikti_CiktiID_seq" OWNED BY public."Cikti"."CiktiID";
+
+
+--
+-- TOC entry 236 (class 1259 OID 16830)
+-- Name: IlaveCikiDetay; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."IlaveCikiDetay" (
+    "ProblemID" integer NOT NULL,
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "MudehaleID" integer NOT NULL,
+    "BelirtecID" integer NOT NULL,
+    "Sira" integer NOT NULL,
+    "EkleyenKullaniciADi" character(30) NOT NULL,
+    "EklemeTarihi" date
+);
+
+
+ALTER TABLE public."IlaveCikiDetay" OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1259 OID 16807)
+-- Name: IlaveMudehaleDetay; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."IlaveMudehaleDetay" (
+    "ProblemID" integer NOT NULL,
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "MudehaleID" integer NOT NULL,
+    "AKtiviteID" integer NOT NULL,
+    "Sira" integer NOT NULL,
+    "EkleyenKullaniciADi" character(30) NOT NULL,
+    "EklemeTarihi" date
+);
+
+
+ALTER TABLE public."IlaveMudehaleDetay" OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 16437)
+-- Name: Ilceler; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Ilceler" (
+    "IlceKodu" integer NOT NULL,
+    "IlKodu" integer NOT NULL,
+    "IlceAdi" character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."Ilceler" OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 16436)
+-- Name: Ilceler_IlceKodu_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Ilceler_IlceKodu_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Ilceler_IlceKodu_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3555 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: Ilceler_IlceKodu_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Ilceler_IlceKodu_seq" OWNED BY public."Ilceler"."IlceKodu";
+
+
+--
+-- TOC entry 211 (class 1259 OID 16423)
+-- Name: Iller; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Iller" (
+    "IlKodu" integer NOT NULL,
+    "IlAdi" character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."Iller" OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 16422)
+-- Name: Iller_IlKodu_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Iller_IlKodu_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Iller_IlKodu_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3556 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: Iller_IlKodu_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Iller_IlKodu_seq" OWNED BY public."Iller"."IlKodu";
+
+
+--
+-- TOC entry 209 (class 1259 OID 16417)
+-- Name: Kullanicilar; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Kullanicilar" (
+    "KullaniciAdi" character varying(15) NOT NULL,
+    "Sifre" character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."Kullanicilar" OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16492)
+-- Name: Mudahale; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Mudahale" (
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "MudaheleID" integer NOT NULL,
+    "MudahaleAdi" character varying NOT NULL
+);
+
+
+ALTER TABLE public."Mudahale" OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16510)
+-- Name: MudahaleDetay; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."MudahaleDetay" (
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "MudaheleID" integer NOT NULL,
+    "AktiviteID" integer NOT NULL,
+    "Sira" integer NOT NULL
+);
+
+
+ALTER TABLE public."MudahaleDetay" OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16509)
+-- Name: MudahaleDetay_MudaheleID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."MudahaleDetay_MudaheleID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."MudahaleDetay_MudaheleID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3557 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: MudahaleDetay_MudaheleID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."MudahaleDetay_MudaheleID_seq" OWNED BY public."MudahaleDetay"."MudaheleID";
+
+
+--
+-- TOC entry 220 (class 1259 OID 16491)
+-- Name: Mudahale_MudaheleID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Mudahale_MudaheleID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Mudahale_MudaheleID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3558 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: Mudahale_MudaheleID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Mudahale_MudaheleID_seq" OWNED BY public."Mudahale"."MudaheleID";
+
+
+--
+-- TOC entry 214 (class 1259 OID 16458)
+-- Name: Personel; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Personel" (
+    "KullaniciAdi" character varying(15) NOT NULL,
+    "Email" character varying(30) NOT NULL,
+    "Ad" character varying(30) NOT NULL,
+    "Soyad" character varying(30) NOT NULL,
+    "SicilNo" character varying(30) NOT NULL,
+    "Cep" character varying(11) NOT NULL,
+    "Ev_adresi" character varying(200) NOT NULL,
+    "IlKodu" integer NOT NULL,
+    "IlceKodu" integer NOT NULL,
+    "PostaKodu" integer NOT NULL,
+    "UstKullaniciAdi" character varying(30),
+    "CalistigiBirimKodu" integer NOT NULL
+);
+
+
+ALTER TABLE public."Personel" OWNER TO postgres;
+
+--
+-- TOC entry 242 (class 1259 OID 16954)
+-- Name: PersonelProblem; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."PersonelProblem" (
+    "ProblemID" integer NOT NULL,
+    "KullaniciAdi" character varying NOT NULL
+);
+
+
+ALTER TABLE public."PersonelProblem" OWNER TO postgres;
+
+--
+-- TOC entry 244 (class 1259 OID 16963)
+-- Name: PersonelProblemDegerlendirme; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."PersonelProblemDegerlendirme" (
+    "ProblemID" integer NOT NULL,
+    "BelirtecID" integer NOT NULL,
+    skor integer NOT NULL,
+    "skorTarihi" integer
+);
+
+
+ALTER TABLE public."PersonelProblemDegerlendirme" OWNER TO postgres;
+
+--
+-- TOC entry 243 (class 1259 OID 16962)
+-- Name: PersonelProblemDegerlendirme_BelirtecID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."PersonelProblemDegerlendirme_BelirtecID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."PersonelProblemDegerlendirme_BelirtecID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3559 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: PersonelProblemDegerlendirme_BelirtecID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."PersonelProblemDegerlendirme_BelirtecID_seq" OWNED BY public."PersonelProblemDegerlendirme"."BelirtecID";
+
+
+--
+-- TOC entry 241 (class 1259 OID 16953)
+-- Name: PersonelProblem_ProblemID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."PersonelProblem_ProblemID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."PersonelProblem_ProblemID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3560 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: PersonelProblem_ProblemID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."PersonelProblem_ProblemID_seq" OWNED BY public."PersonelProblem"."ProblemID";
+
+
+--
+-- TOC entry 240 (class 1259 OID 16947)
+-- Name: ProblemBirim; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ProblemBirim" (
+    "ProblemID" integer NOT NULL,
+    "BirimID" integer NOT NULL,
+    "EslesmeTarihi" character varying(30)
+);
+
+
+ALTER TABLE public."ProblemBirim" OWNER TO postgres;
+
+--
+-- TOC entry 239 (class 1259 OID 16946)
+-- Name: ProblemBirim_ProblemID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."ProblemBirim_ProblemID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."ProblemBirim_ProblemID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3561 (class 0 OID 0)
+-- Dependencies: 239
+-- Name: ProblemBirim_ProblemID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."ProblemBirim_ProblemID_seq" OWNED BY public."ProblemBirim"."ProblemID";
+
+
+--
+-- TOC entry 234 (class 1259 OID 16789)
+-- Name: ProblemCikti; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ProblemCikti" (
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "CiktiID" integer NOT NULL,
+    "ProblemID" integer NOT NULL
+);
+
+
+ALTER TABLE public."ProblemCikti" OWNER TO postgres;
+
+--
+-- TOC entry 237 (class 1259 OID 16885)
+-- Name: ProblemDurumDegerlendirme; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ProblemDurumDegerlendirme" (
+    "ProblemID" integer NOT NULL,
+    "YeniProblemID" integer NOT NULL,
+    "YeniProblemTanimi" character(200) NOT NULL,
+    "YeniHedef" character(200) NOT NULL,
+    "OncekiProblemSkoru" integer NOT NULL,
+    "TahminEdilenProblemSkoru" integer,
+    "DegerlendirmeTarihi" date,
+    "DegerlendirenKullaniciAdi" character(1) NOT NULL
+);
+
+
+ALTER TABLE public."ProblemDurumDegerlendirme" OWNER TO postgres;
+
+--
+-- TOC entry 233 (class 1259 OID 16771)
+-- Name: ProblemMudehale; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ProblemMudehale" (
+    "AlanID" integer NOT NULL,
+    "SinifID" integer NOT NULL,
+    "MudehaleID" integer NOT NULL,
+    "ProblemID" integer NOT NULL
+);
+
+
+ALTER TABLE public."ProblemMudehale" OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16472)
+-- Name: Problemler; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Problemler" (
+    "ProblemTipiID" integer NOT NULL,
+    "ProblemTanimi" character varying(200) NOT NULL,
+    "ProblemiTanimlayiciAdi" character varying(30) NOT NULL,
+    "ProblemiTanimlayiciSoyadi" character varying(30) NOT NULL,
+    "ProblemiTanimlayanTCNOPasaportno" character varying(30) NOT NULL,
+    "HedeflenenAmacTanimi" character varying(200)
+);
+
+
+ALTER TABLE public."Problemler" OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16485)
+-- Name: Siniflar; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Siniflar" (
+    "SinifID" integer NOT NULL,
+    "SinifAdi" character varying(30) NOT NULL,
+    "AlanTipi" boolean NOT NULL
+);
+
+
+ALTER TABLE public."Siniflar" OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16484)
+-- Name: Siniflar_SinifID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Siniflar_SinifID_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Siniflar_SinifID_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3562 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: Siniflar_SinifID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Siniflar_SinifID_seq" OWNED BY public."Siniflar"."SinifID";
+
+
+--
+-- TOC entry 3269 (class 2604 OID 16506)
+-- Name: Aktiviteler AktiviteID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Aktiviteler" ALTER COLUMN "AktiviteID" SET DEFAULT nextval('public."Aktiviteler_AktiviteID_seq"'::regclass);
+
+
+--
+-- TOC entry 3266 (class 2604 OID 16481)
+-- Name: Alanlar AlanID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alanlar" ALTER COLUMN "AlanID" SET DEFAULT nextval('public."Alanlar_AlanID_seq"'::regclass);
+
+
+--
+-- TOC entry 3272 (class 2604 OID 16535)
+-- Name: Belirtecler BelirtecID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Belirtecler" ALTER COLUMN "BelirtecID" SET DEFAULT nextval('public."Belirtecler_BelirtecID_seq"'::regclass);
+
+
+--
+-- TOC entry 3271 (class 2604 OID 16524)
+-- Name: Cikti CiktiID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Cikti" ALTER COLUMN "CiktiID" SET DEFAULT nextval('public."Cikti_CiktiID_seq"'::regclass);
+
+
+--
+-- TOC entry 3273 (class 2604 OID 16544)
+-- Name: CiktiDetay CiktiID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CiktiDetay" ALTER COLUMN "CiktiID" SET DEFAULT nextval('public."CiktiDetay_CiktiID_seq"'::regclass);
+
+
+--
+-- TOC entry 3265 (class 2604 OID 16440)
+-- Name: Ilceler IlceKodu; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Ilceler" ALTER COLUMN "IlceKodu" SET DEFAULT nextval('public."Ilceler_IlceKodu_seq"'::regclass);
+
+
+--
+-- TOC entry 3264 (class 2604 OID 16426)
+-- Name: Iller IlKodu; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Iller" ALTER COLUMN "IlKodu" SET DEFAULT nextval('public."Iller_IlKodu_seq"'::regclass);
+
+
+--
+-- TOC entry 3268 (class 2604 OID 16495)
+-- Name: Mudahale MudaheleID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Mudahale" ALTER COLUMN "MudaheleID" SET DEFAULT nextval('public."Mudahale_MudaheleID_seq"'::regclass);
+
+
+--
+-- TOC entry 3270 (class 2604 OID 16513)
+-- Name: MudahaleDetay MudaheleID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."MudahaleDetay" ALTER COLUMN "MudaheleID" SET DEFAULT nextval('public."MudahaleDetay_MudaheleID_seq"'::regclass);
+
+
+--
+-- TOC entry 3275 (class 2604 OID 16957)
+-- Name: PersonelProblem ProblemID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."PersonelProblem" ALTER COLUMN "ProblemID" SET DEFAULT nextval('public."PersonelProblem_ProblemID_seq"'::regclass);
+
+
+--
+-- TOC entry 3276 (class 2604 OID 16966)
+-- Name: PersonelProblemDegerlendirme BelirtecID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."PersonelProblemDegerlendirme" ALTER COLUMN "BelirtecID" SET DEFAULT nextval('public."PersonelProblemDegerlendirme_BelirtecID_seq"'::regclass);
+
+
+--
+-- TOC entry 3274 (class 2604 OID 16950)
+-- Name: ProblemBirim ProblemID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemBirim" ALTER COLUMN "ProblemID" SET DEFAULT nextval('public."ProblemBirim_ProblemID_seq"'::regclass);
+
+
+--
+-- TOC entry 3267 (class 2604 OID 16488)
+-- Name: Siniflar SinifID; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Siniflar" ALTER COLUMN "SinifID" SET DEFAULT nextval('public."Siniflar_SinifID_seq"'::regclass);
+
+
+--
+-- TOC entry 3523 (class 0 OID 16503)
+-- Dependencies: 223
+-- Data for Name: Aktiviteler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Aktiviteler" ("AktiviteID", "AktiviteTanimi") FROM stdin;
+1	boya ekleme
+2	motor bakımı
+3	arabanin dişarida cilananıp kurumaya birakilmasi
+\.
+
+
+--
+-- TOC entry 3517 (class 0 OID 16478)
+-- Dependencies: 217
+-- Data for Name: Alanlar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Alanlar" ("AlanID", "AlanAdi", "AlanTipi") FROM stdin;
+1	boyama	t
+2	cila	t
+\.
+
+
+--
+-- TOC entry 3529 (class 0 OID 16532)
+-- Dependencies: 229
+-- Data for Name: Belirtecler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Belirtecler" ("BelirtecID", "BelirtecAdi") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3532 (class 0 OID 16637)
+-- Dependencies: 232
+-- Data for Name: Birimler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Birimler" ("BirimAdi", "BirimKodu", "BulunduguAdres", "IlKodu", "UstBirimKodu", "IlceKodu", "PostaKodu", "BirimMudurKullaniciAdi") FROM stdin;
+boya                          	1	home                                                                                                                                                                                                    	7	\N	71	45633	Mertcan                       
+\.
+
+
+--
+-- TOC entry 3538 (class 0 OID 16888)
+-- Dependencies: 238
+-- Data for Name: CalisanProblem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."CalisanProblem" ("ProblemID", "KullaniciAdi", "AlanID", "SinifID", "MudehaleID", "AktiviteID", "AktiviteAciklama", "Tarih") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3527 (class 0 OID 16521)
+-- Dependencies: 227
+-- Data for Name: Cikti; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Cikti" ("AlanID", "SinifID", "CiktiID", "CiktiAdi") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3531 (class 0 OID 16541)
+-- Dependencies: 231
+-- Data for Name: CiktiDetay; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."CiktiDetay" ("AlanID", "SinifID", "CiktiID", "BelirtecID", "Sira") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3536 (class 0 OID 16830)
+-- Dependencies: 236
+-- Data for Name: IlaveCikiDetay; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."IlaveCikiDetay" ("ProblemID", "AlanID", "SinifID", "MudehaleID", "BelirtecID", "Sira", "EkleyenKullaniciADi", "EklemeTarihi") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3535 (class 0 OID 16807)
+-- Dependencies: 235
+-- Data for Name: IlaveMudehaleDetay; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."IlaveMudehaleDetay" ("ProblemID", "AlanID", "SinifID", "MudehaleID", "AKtiviteID", "Sira", "EkleyenKullaniciADi", "EklemeTarihi") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3513 (class 0 OID 16437)
+-- Dependencies: 213
+-- Data for Name: Ilceler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Ilceler" ("IlceKodu", "IlKodu", "IlceAdi") FROM stdin;
+46	1	Elbistan
+462	46	Afsin
+381	38	Pinarbaşı
+251	25	Tortul
+711	71	Bahsili
+261	26	Tepebasi
+421	42	Aksehir
+463	46	Goksun
+71	7	GaziPasa
+\.
+
+
+--
+-- TOC entry 3511 (class 0 OID 16423)
+-- Dependencies: 211
+-- Data for Name: Iller; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Iller" ("IlKodu", "IlAdi") FROM stdin;
+1	Ankara
+25	Erzurum
+71	Kırıkkale
+42	Konya
+38	Kayseri
+26	Eskişehir
+46	Kahramanmaraş
+7	Antalya
+16	bursa
+\.
+
+
+--
+-- TOC entry 3509 (class 0 OID 16417)
+-- Dependencies: 209
+-- Data for Name: Kullanicilar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Kullanicilar" ("KullaniciAdi", "Sifre") FROM stdin;
+Mertcan	adfsgdhfhTRTRYU/
+ahmedsa	ahmedsaidy*
+ahmeds	sifreDu/as
+Ahmed_Said	sifreASY*
+Esila	sifreBellioldu/
+veritabani	Sifrebulundu/
+veritabanidersi	sifreBulundu/
+veritaban	sifreBulundu/
+\.
+
+
+--
+-- TOC entry 3521 (class 0 OID 16492)
+-- Dependencies: 221
+-- Data for Name: Mudahale; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Mudahale" ("AlanID", "SinifID", "MudaheleID", "MudahaleAdi") FROM stdin;
+12	77	11	Ahmed Said
+1	1	1	boyama
+2	2	2	cila
+\.
+
+
+--
+-- TOC entry 3525 (class 0 OID 16510)
+-- Dependencies: 225
+-- Data for Name: MudahaleDetay; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."MudahaleDetay" ("AlanID", "SinifID", "MudaheleID", "AktiviteID", "Sira") FROM stdin;
+1	1	1	1	1
+2	2	2	3	2
+\.
+
+
+--
+-- TOC entry 3514 (class 0 OID 16458)
+-- Dependencies: 214
+-- Data for Name: Personel; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Personel" ("KullaniciAdi", "Email", "Ad", "Soyad", "SicilNo", "Cep", "Ev_adresi", "IlKodu", "IlceKodu", "PostaKodu", "UstKullaniciAdi", "CalistigiBirimKodu") FROM stdin;
+ahmed1	a@gmail.com	ahmed	yuksek	123456789	05441235896		6	11	65322		0
+Esila	e@gmail.com	Esila	y	1234741	05888963258		26	1	26100		0
+Mertcan	m@gmail.com	Mertcan	b	12347411	05888963258		71	711	71100		0
+ahmeds	as@hotmail.com	as	y	1235669565	01447854269		1	1	26999		0
+ahmedsa	aas@gmail.com	ahmeds	yuksek	12347922335	0544784136		1	1	46300		0
+veritabani	veri@gmail.com	as	y	123446747	04415896325		7	71	71022		0
+veritabanidersi	veritabanidersi@hotmail.com	veri	tabani	7413675	0551475963		7	71	7112		1
+veritaban	vertaban@hotmail.com	verit	veritabani	25625637	0554741296		7	71	12477		1
+\.
+
+
+--
+-- TOC entry 3542 (class 0 OID 16954)
+-- Dependencies: 242
+-- Data for Name: PersonelProblem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."PersonelProblem" ("ProblemID", "KullaniciAdi") FROM stdin;
+1	Esila
+2	ahmedsa
+17	ahmedsa
+\.
+
+
+--
+-- TOC entry 3544 (class 0 OID 16963)
+-- Dependencies: 244
+-- Data for Name: PersonelProblemDegerlendirme; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."PersonelProblemDegerlendirme" ("ProblemID", "BelirtecID", skor, "skorTarihi") FROM stdin;
+17	1	5	21
+\.
+
+
+--
+-- TOC entry 3540 (class 0 OID 16947)
+-- Dependencies: 240
+-- Data for Name: ProblemBirim; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."ProblemBirim" ("ProblemID", "BirimID", "EslesmeTarihi") FROM stdin;
+1	1	
+\.
+
+
+--
+-- TOC entry 3534 (class 0 OID 16789)
+-- Dependencies: 234
+-- Data for Name: ProblemCikti; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."ProblemCikti" ("AlanID", "SinifID", "CiktiID", "ProblemID") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3537 (class 0 OID 16885)
+-- Dependencies: 237
+-- Data for Name: ProblemDurumDegerlendirme; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."ProblemDurumDegerlendirme" ("ProblemID", "YeniProblemID", "YeniProblemTanimi", "YeniHedef", "OncekiProblemSkoru", "TahminEdilenProblemSkoru", "DegerlendirmeTarihi", "DegerlendirenKullaniciAdi") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3533 (class 0 OID 16771)
+-- Dependencies: 233
+-- Data for Name: ProblemMudehale; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."ProblemMudehale" ("AlanID", "SinifID", "MudehaleID", "ProblemID") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3515 (class 0 OID 16472)
+-- Dependencies: 215
+-- Data for Name: Problemler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Problemler" ("ProblemTipiID", "ProblemTanimi", "ProblemiTanimlayiciAdi", "ProblemiTanimlayiciSoyadi", "ProblemiTanimlayanTCNOPasaportno", "HedeflenenAmacTanimi") FROM stdin;
+12	araba boyasi	ahmedsaid	yuksek	27147486322	
+11	araba boyasi	mertcan 	biskin	84598556922	
+1	araba boyasi	Ahmed	yuksek	77412585211	\N
+2	cila	Mert can	gonen	11415896322	
+7	araba tekerlek degisimi	ahmed said	yuksek	4479625800	
+17	araba cant degisimi	ahmed	yuksek	11477526922	
+\.
+
+
+--
+-- TOC entry 3519 (class 0 OID 16485)
+-- Dependencies: 219
+-- Data for Name: Siniflar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Siniflar" ("SinifID", "SinifAdi", "AlanTipi") FROM stdin;
+1	boya_birimi	t
+2	cila_birimi	t
+\.
+
+
+--
+-- TOC entry 3563 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: Aktiviteler_AktiviteID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Aktiviteler_AktiviteID_seq"', 1, false);
+
+
+--
+-- TOC entry 3564 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: Alanlar_AlanID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Alanlar_AlanID_seq"', 1, false);
+
+
+--
+-- TOC entry 3565 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: Belirtecler_BelirtecID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Belirtecler_BelirtecID_seq"', 1, false);
+
+
+--
+-- TOC entry 3566 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: CiktiDetay_CiktiID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."CiktiDetay_CiktiID_seq"', 1, false);
+
+
+--
+-- TOC entry 3567 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: Cikti_CiktiID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Cikti_CiktiID_seq"', 1, false);
+
+
+--
+-- TOC entry 3568 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: Ilceler_IlceKodu_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Ilceler_IlceKodu_seq"', 1, false);
+
+
+--
+-- TOC entry 3569 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: Iller_IlKodu_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Iller_IlKodu_seq"', 1, false);
+
+
+--
+-- TOC entry 3570 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: MudahaleDetay_MudaheleID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."MudahaleDetay_MudaheleID_seq"', 1, false);
+
+
+--
+-- TOC entry 3571 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: Mudahale_MudaheleID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Mudahale_MudaheleID_seq"', 1, false);
+
+
+--
+-- TOC entry 3572 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: PersonelProblemDegerlendirme_BelirtecID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."PersonelProblemDegerlendirme_BelirtecID_seq"', 1, false);
+
+
+--
+-- TOC entry 3573 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: PersonelProblem_ProblemID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."PersonelProblem_ProblemID_seq"', 1, false);
+
+
+--
+-- TOC entry 3574 (class 0 OID 0)
+-- Dependencies: 239
+-- Name: ProblemBirim_ProblemID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."ProblemBirim_ProblemID_seq"', 1, false);
+
+
+--
+-- TOC entry 3575 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: Siniflar_SinifID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Siniflar_SinifID_seq"', 1, false);
+
+
+--
+-- TOC entry 3300 (class 2606 OID 16508)
+-- Name: Aktiviteler Aktiviteler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Aktiviteler"
+    ADD CONSTRAINT "Aktiviteler_pkey" PRIMARY KEY ("AktiviteID");
+
+
+--
+-- TOC entry 3292 (class 2606 OID 16483)
+-- Name: Alanlar Alanlar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Alanlar"
+    ADD CONSTRAINT "Alanlar_pkey" PRIMARY KEY ("AlanID");
+
+
+--
+-- TOC entry 3314 (class 2606 OID 16539)
+-- Name: Belirtecler Belirtecler_BelirtecAdi_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Belirtecler"
+    ADD CONSTRAINT "Belirtecler_BelirtecAdi_key" UNIQUE ("BelirtecAdi");
+
+
+--
+-- TOC entry 3316 (class 2606 OID 16537)
+-- Name: Belirtecler Belirtecler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Belirtecler"
+    ADD CONSTRAINT "Belirtecler_pkey" PRIMARY KEY ("BelirtecID");
+
+
+--
+-- TOC entry 3324 (class 2606 OID 16643)
+-- Name: Birimler Birimler_BirimKodu_UstBirimKodu_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Birimler"
+    ADD CONSTRAINT "Birimler_BirimKodu_UstBirimKodu_key" UNIQUE ("BirimKodu", "UstBirimKodu");
+
+
+--
+-- TOC entry 3326 (class 2606 OID 16641)
+-- Name: Birimler Birimler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Birimler"
+    ADD CONSTRAINT "Birimler_pkey" PRIMARY KEY ("BirimKodu");
+
+
+--
+-- TOC entry 3318 (class 2606 OID 16548)
+-- Name: CiktiDetay CiktiDetay_AlanID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CiktiDetay"
+    ADD CONSTRAINT "CiktiDetay_AlanID_key" UNIQUE ("AlanID");
+
+
+--
+-- TOC entry 3320 (class 2606 OID 16738)
+-- Name: CiktiDetay CiktiDetay_BelirtecID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CiktiDetay"
+    ADD CONSTRAINT "CiktiDetay_BelirtecID_key" UNIQUE ("BelirtecID");
+
+
+--
+-- TOC entry 3322 (class 2606 OID 16546)
+-- Name: CiktiDetay CiktiDetay_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CiktiDetay"
+    ADD CONSTRAINT "CiktiDetay_pkey" PRIMARY KEY ("CiktiID");
+
+
+--
+-- TOC entry 3308 (class 2606 OID 16528)
+-- Name: Cikti Cikti_AlanID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Cikti"
+    ADD CONSTRAINT "Cikti_AlanID_key" UNIQUE ("AlanID");
+
+
+--
+-- TOC entry 3310 (class 2606 OID 16530)
+-- Name: Cikti Cikti_CiktiAdi_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Cikti"
+    ADD CONSTRAINT "Cikti_CiktiAdi_key" UNIQUE ("CiktiAdi");
+
+
+--
+-- TOC entry 3312 (class 2606 OID 16526)
+-- Name: Cikti Cikti_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Cikti"
+    ADD CONSTRAINT "Cikti_pkey" PRIMARY KEY ("CiktiID");
+
+
+--
+-- TOC entry 3282 (class 2606 OID 16442)
+-- Name: Ilceler Ilceler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Ilceler"
+    ADD CONSTRAINT "Ilceler_pkey" PRIMARY KEY ("IlceKodu");
+
+
+--
+-- TOC entry 3280 (class 2606 OID 16428)
+-- Name: Iller Iller_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Iller"
+    ADD CONSTRAINT "Iller_pkey" PRIMARY KEY ("IlKodu");
+
+
+--
+-- TOC entry 3278 (class 2606 OID 16421)
+-- Name: Kullanicilar Kullanicilar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Kullanicilar"
+    ADD CONSTRAINT "Kullanicilar_pkey" PRIMARY KEY ("KullaniciAdi");
+
+
+--
+-- TOC entry 3302 (class 2606 OID 16519)
+-- Name: MudahaleDetay MudahaleDetay_AktiviteID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."MudahaleDetay"
+    ADD CONSTRAINT "MudahaleDetay_AktiviteID_key" UNIQUE ("AktiviteID");
+
+
+--
+-- TOC entry 3304 (class 2606 OID 16517)
+-- Name: MudahaleDetay MudahaleDetay_AlanID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."MudahaleDetay"
+    ADD CONSTRAINT "MudahaleDetay_AlanID_key" UNIQUE ("AlanID");
+
+
+--
+-- TOC entry 3306 (class 2606 OID 16515)
+-- Name: MudahaleDetay MudahaleDetay_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."MudahaleDetay"
+    ADD CONSTRAINT "MudahaleDetay_pkey" PRIMARY KEY ("MudaheleID");
+
+
+--
+-- TOC entry 3296 (class 2606 OID 16501)
+-- Name: Mudahale Mudahale_AlanID_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Mudahale"
+    ADD CONSTRAINT "Mudahale_AlanID_key" UNIQUE ("AlanID");
+
+
+--
+-- TOC entry 3298 (class 2606 OID 16499)
+-- Name: Mudahale Mudahale_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Mudahale"
+    ADD CONSTRAINT "Mudahale_pkey" PRIMARY KEY ("MudaheleID");
+
+
+--
+-- TOC entry 3332 (class 2606 OID 16968)
+-- Name: PersonelProblemDegerlendirme PersonelProblemDegerlendirme_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."PersonelProblemDegerlendirme"
+    ADD CONSTRAINT "PersonelProblemDegerlendirme_pkey" PRIMARY KEY ("BelirtecID");
+
+
+--
+-- TOC entry 3330 (class 2606 OID 16961)
+-- Name: PersonelProblem PersonelProblem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."PersonelProblem"
+    ADD CONSTRAINT "PersonelProblem_pkey" PRIMARY KEY ("ProblemID");
+
+
+--
+-- TOC entry 3284 (class 2606 OID 16464)
+-- Name: Personel Personel_Email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Personel"
+    ADD CONSTRAINT "Personel_Email_key" UNIQUE ("Email");
+
+
+--
+-- TOC entry 3286 (class 2606 OID 16466)
+-- Name: Personel Personel_SicilNo_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Personel"
+    ADD CONSTRAINT "Personel_SicilNo_key" UNIQUE ("SicilNo");
+
+
+--
+-- TOC entry 3288 (class 2606 OID 16462)
+-- Name: Personel Personel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Personel"
+    ADD CONSTRAINT "Personel_pkey" PRIMARY KEY ("KullaniciAdi");
+
+
+--
+-- TOC entry 3328 (class 2606 OID 16952)
+-- Name: ProblemBirim ProblemBirim_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemBirim"
+    ADD CONSTRAINT "ProblemBirim_pkey" PRIMARY KEY ("ProblemID");
+
+
+--
+-- TOC entry 3290 (class 2606 OID 16476)
+-- Name: Problemler Problemler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Problemler"
+    ADD CONSTRAINT "Problemler_pkey" PRIMARY KEY ("ProblemTipiID", "ProblemTanimi");
+
+
+--
+-- TOC entry 3294 (class 2606 OID 16490)
+-- Name: Siniflar Siniflar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Siniflar"
+    ADD CONSTRAINT "Siniflar_pkey" PRIMARY KEY ("SinifID");
+
+
+--
+-- TOC entry 3357 (class 2606 OID 16825)
+-- Name: IlaveMudehaleDetay AktiviteID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveMudehaleDetay"
+    ADD CONSTRAINT "AktiviteID" FOREIGN KEY ("AKtiviteID") REFERENCES public."Aktiviteler"("AktiviteID");
+
+
+--
+-- TOC entry 3365 (class 2606 OID 16906)
+-- Name: CalisanProblem AktiviteID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CalisanProblem"
+    ADD CONSTRAINT "AktiviteID" FOREIGN KEY ("AktiviteID") REFERENCES public."Aktiviteler"("AktiviteID");
+
+
+--
+-- TOC entry 3339 (class 2606 OID 16674)
+-- Name: MudahaleDetay Alan; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."MudahaleDetay"
+    ADD CONSTRAINT "Alan" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID") NOT VALID;
+
+
+--
+-- TOC entry 3342 (class 2606 OID 16689)
+-- Name: Cikti Alan; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Cikti"
+    ADD CONSTRAINT "Alan" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID") NOT VALID;
+
+
+--
+-- TOC entry 3344 (class 2606 OID 16745)
+-- Name: CiktiDetay Alan; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CiktiDetay"
+    ADD CONSTRAINT "Alan" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID") NOT VALID;
+
+
+--
+-- TOC entry 3337 (class 2606 OID 16664)
+-- Name: Mudahale AlanID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Mudahale"
+    ADD CONSTRAINT "AlanID" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID") NOT VALID;
+
+
+--
+-- TOC entry 3354 (class 2606 OID 16797)
+-- Name: ProblemCikti AlanID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemCikti"
+    ADD CONSTRAINT "AlanID" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID");
+
+
+--
+-- TOC entry 3358 (class 2606 OID 16810)
+-- Name: IlaveMudehaleDetay AlanID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveMudehaleDetay"
+    ADD CONSTRAINT "AlanID" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID");
+
+
+--
+-- TOC entry 3361 (class 2606 OID 16833)
+-- Name: IlaveCikiDetay AlanID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveCikiDetay"
+    ADD CONSTRAINT "AlanID" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID");
+
+
+--
+-- TOC entry 3366 (class 2606 OID 16891)
+-- Name: CalisanProblem AlanID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CalisanProblem"
+    ADD CONSTRAINT "AlanID" FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID");
+
+
+--
+-- TOC entry 3362 (class 2606 OID 16848)
+-- Name: IlaveCikiDetay BelirtecID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveCikiDetay"
+    ADD CONSTRAINT "BelirtecID" FOREIGN KEY ("BelirtecID") REFERENCES public."Belirtecler"("BelirtecID");
+
+
+--
+-- TOC entry 3349 (class 2606 OID 16654)
+-- Name: Birimler BirimMudurKullaniciAdi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Birimler"
+    ADD CONSTRAINT "BirimMudurKullaniciAdi" FOREIGN KEY ("BirimMudurKullaniciAdi") REFERENCES public."Kullanicilar"("KullaniciAdi");
+
+
+--
+-- TOC entry 3346 (class 2606 OID 16755)
+-- Name: CiktiDetay Cikti; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CiktiDetay"
+    ADD CONSTRAINT "Cikti" FOREIGN KEY ("CiktiID") REFERENCES public."Cikti"("CiktiID") NOT VALID;
+
+
+--
+-- TOC entry 3355 (class 2606 OID 16792)
+-- Name: ProblemCikti CiktiID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemCikti"
+    ADD CONSTRAINT "CiktiID" FOREIGN KEY ("CiktiID") REFERENCES public."Cikti"("CiktiID");
+
+
+--
+-- TOC entry 3347 (class 2606 OID 16644)
+-- Name: Birimler IL; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Birimler"
+    ADD CONSTRAINT "IL" FOREIGN KEY ("IlKodu") REFERENCES public."Iller"("IlKodu");
+
+
+--
+-- TOC entry 3348 (class 2606 OID 16649)
+-- Name: Birimler Ilce; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Birimler"
+    ADD CONSTRAINT "Ilce" FOREIGN KEY ("IlceKodu") REFERENCES public."Ilceler"("IlceKodu");
+
+
+--
+-- TOC entry 3336 (class 2606 OID 16627)
+-- Name: Personel IlceKodu; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Personel"
+    ADD CONSTRAINT "IlceKodu" FOREIGN KEY ("IlceKodu") REFERENCES public."Ilceler"("IlceKodu") NOT VALID;
+
+
+--
+-- TOC entry 3335 (class 2606 OID 16622)
+-- Name: Personel Ilkodu; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Personel"
+    ADD CONSTRAINT "Ilkodu" FOREIGN KEY ("IlKodu") REFERENCES public."Iller"("IlKodu") NOT VALID;
+
+
+--
+-- TOC entry 3341 (class 2606 OID 16684)
+-- Name: MudahaleDetay Mudehale; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."MudahaleDetay"
+    ADD CONSTRAINT "Mudehale" FOREIGN KEY ("MudaheleID") REFERENCES public."Mudahale"("MudaheleID") NOT VALID;
+
+
+--
+-- TOC entry 3351 (class 2606 OID 16784)
+-- Name: ProblemMudehale Mudehale; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemMudehale"
+    ADD CONSTRAINT "Mudehale" FOREIGN KEY ("MudehaleID") REFERENCES public."Mudahale"("MudaheleID");
+
+
+--
+-- TOC entry 3359 (class 2606 OID 16820)
+-- Name: IlaveMudehaleDetay MudehaleID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveMudehaleDetay"
+    ADD CONSTRAINT "MudehaleID" FOREIGN KEY ("MudehaleID") REFERENCES public."Mudahale"("MudaheleID");
+
+
+--
+-- TOC entry 3363 (class 2606 OID 16843)
+-- Name: IlaveCikiDetay MudehaleID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveCikiDetay"
+    ADD CONSTRAINT "MudehaleID" FOREIGN KEY ("MudehaleID") REFERENCES public."Mudahale"("MudaheleID");
+
+
+--
+-- TOC entry 3367 (class 2606 OID 16901)
+-- Name: CalisanProblem MudehaleID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CalisanProblem"
+    ADD CONSTRAINT "MudehaleID" FOREIGN KEY ("MudehaleID") REFERENCES public."Mudahale"("MudaheleID");
+
+
+--
+-- TOC entry 3360 (class 2606 OID 16815)
+-- Name: IlaveMudehaleDetay SinfiID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveMudehaleDetay"
+    ADD CONSTRAINT "SinfiID" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID");
+
+
+--
+-- TOC entry 3364 (class 2606 OID 16838)
+-- Name: IlaveCikiDetay SinfiID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."IlaveCikiDetay"
+    ADD CONSTRAINT "SinfiID" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID");
+
+
+--
+-- TOC entry 3340 (class 2606 OID 16679)
+-- Name: MudahaleDetay Sinif; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."MudahaleDetay"
+    ADD CONSTRAINT "Sinif" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID") NOT VALID;
+
+
+--
+-- TOC entry 3343 (class 2606 OID 16694)
+-- Name: Cikti Sinif; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Cikti"
+    ADD CONSTRAINT "Sinif" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID") NOT VALID;
+
+
+--
+-- TOC entry 3345 (class 2606 OID 16750)
+-- Name: CiktiDetay Sinif; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CiktiDetay"
+    ADD CONSTRAINT "Sinif" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID") NOT VALID;
+
+
+--
+-- TOC entry 3338 (class 2606 OID 16669)
+-- Name: Mudahale SinifID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Mudahale"
+    ADD CONSTRAINT "SinifID" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID") NOT VALID;
+
+
+--
+-- TOC entry 3356 (class 2606 OID 16802)
+-- Name: ProblemCikti SinifID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemCikti"
+    ADD CONSTRAINT "SinifID" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID");
+
+
+--
+-- TOC entry 3368 (class 2606 OID 16896)
+-- Name: CalisanProblem SinifID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CalisanProblem"
+    ADD CONSTRAINT "SinifID" FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID");
+
+
+--
+-- TOC entry 3350 (class 2606 OID 16659)
+-- Name: Birimler UstBirimKodu; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Birimler"
+    ADD CONSTRAINT "UstBirimKodu" FOREIGN KEY ("UstBirimKodu") REFERENCES public."Birimler"("BirimKodu") NOT VALID;
+
+
+--
+-- TOC entry 3352 (class 2606 OID 16774)
+-- Name: ProblemMudehale alan; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemMudehale"
+    ADD CONSTRAINT alan FOREIGN KEY ("AlanID") REFERENCES public."Alanlar"("AlanID");
+
+
+--
+-- TOC entry 3333 (class 2606 OID 16552)
+-- Name: Ilceler ilKodu; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Ilceler"
+    ADD CONSTRAINT "ilKodu" FOREIGN KEY ("IlKodu") REFERENCES public."Iller"("IlKodu") NOT VALID;
+
+
+--
+-- TOC entry 3334 (class 2606 OID 16617)
+-- Name: Personel kullaniciAdi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Personel"
+    ADD CONSTRAINT "kullaniciAdi" FOREIGN KEY ("KullaniciAdi") REFERENCES public."Kullanicilar"("KullaniciAdi") NOT VALID;
+
+
+--
+-- TOC entry 3369 (class 2606 OID 16911)
+-- Name: CalisanProblem kullaniciAdi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."CalisanProblem"
+    ADD CONSTRAINT "kullaniciAdi" FOREIGN KEY ("KullaniciAdi") REFERENCES public."Kullanicilar"("KullaniciAdi");
+
+
+--
+-- TOC entry 3353 (class 2606 OID 16779)
+-- Name: ProblemMudehale sinif; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ProblemMudehale"
+    ADD CONSTRAINT sinif FOREIGN KEY ("SinifID") REFERENCES public."Siniflar"("SinifID");
+
+
+-- Completed on 2021-11-21 22:30:11
+
+--
+-- PostgreSQL database dump complete
+--
+
